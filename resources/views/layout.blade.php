@@ -8,7 +8,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <div>
+
+        
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Webshop</a>
+    </nav>
+    
+
+  <div class="wrapper" style="margin: 20px;">
     @yield('content')
   </div>
   <script src="{{ asset('js/app.js') }}" type="text/js"></script>
