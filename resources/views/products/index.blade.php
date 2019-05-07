@@ -4,12 +4,13 @@
     
 <div class="row">
     
-@foreach($categories as $category)
-    <div class="col-sm-2">
+@foreach($products as $product)
+    <div class="col-sm-3">
         <div class="card" style="margin-bottom: 30px;">
           <div class="card-body">
-            <h5 class="card-title">{{$category->name}}</h5>
-            <a href="{{ url('products?id=' . $category->id) }}" class="btn btn-primary">Go</a>
+            <h5 class="card-title">{{$product->name}}</h5>
+            <p class="card-text">{{$product->details}}</p>
+            <a href="#" class="btn btn-primary">Go</a>
           </div>
         </div>
     </div>

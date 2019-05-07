@@ -16,3 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/categories', 'CategoryController@index')->name('category');
+
+Route::get('/products', 'ProductController@index')->name('product');
+
