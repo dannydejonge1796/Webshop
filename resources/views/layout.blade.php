@@ -9,15 +9,27 @@
 </head>
 <body>
 
-        
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('categories') }}">Webshop</a>
-    </nav>
-    
 
-  <div class="wrapper" style="margin-top: 20px; margin-bottom: 20px; margin-right: 100px; margin-left: 100px;">
-    @yield('content')
-  </div>
-  <script src="{{ asset('js/app.js') }}" type="text/js"></script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ url('products') }}">Webshop</a>
+</nav>
+    
+<div class="wrapper">
+    <div class="side" style="float: left; width: 15%;">
+    @foreach($categories as $category)
+        <div class="card" style="width: 10rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{$category->name}}</h5>
+            <a href="{{ url('products?category=' . $category->id) }}" class="btn btn-success">Go</a>
+          </div>
+        </div>
+    @endforeach
+    </div>
+    <div class="content" style="float: right; width: 85%;">
+        @yield('content')
+    </div>
+</div>
+    
+<script src="{{ asset('js/app.js') }}" type="text/js"></script>
 </body>
 </html>

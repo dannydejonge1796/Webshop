@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductController extends Controller
 {
@@ -14,13 +16,14 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {  
-        $id = $request->get('id');
+        $id = $request->get('category');
         
+        $categories = Category::all();
         $products = Product::all();
         if($id !== null){
-            $products = DB::table('products')->where('id', $id);
+            $products = DB::table('products')->where('category_id', $id)->get();
         }
         
-        return view('products.index', ['products' => $products]);
+        return view('products.index', ['products' => $products, 'categories' => $categories]);
     }
 }
