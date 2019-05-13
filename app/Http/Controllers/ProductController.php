@@ -26,4 +26,20 @@ class ProductController extends Controller
         
         return view('products.index', ['products' => $products, 'categories' => $categories]);
     }
+    
+    
+    /**
+     * Display detail page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detailsAction(Request $request)
+    {
+        $id = $request->get('product');
+    
+        $categories = Category::all();
+        $product = DB::table('products')->where('id', $id)->get();
+
+        return view('products.details', ['product' => $product, 'categories' => $categories]); 
+    }
 }

@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('/products', 'ProductController@index')->name('product');
 
+Route::get('/details', 'ProductController@detailsAction')->name('details');
+
