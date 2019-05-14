@@ -18,6 +18,8 @@ Route::get('/', function () {
 //Route::get('/categories', 'CategoryController@index')->name('category');
 
 Route::get('/products', 'ProductController@index')->name('product');
-
 Route::get('/details', 'ProductController@detailsAction')->name('details');
+Route::get('/card', 'ProductController@cardAction')->name('card');
+
+
 

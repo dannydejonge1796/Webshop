@@ -42,4 +42,22 @@ class ProductController extends Controller
 
         return view('products.details', ['product' => $product, 'categories' => $categories]); 
     }
+    
+    /**
+     * Add products to shoppingcard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cardAction(Request $request)
+    {
+        $id = $request->get('product');
+        $product = DB::table('products')->where('id', $id)->get();
+        $category_id = $product->first()->category_id;
+        $categoryEr = DB::table('categories')->where('id', $category_id)->get();
+        $category = $categoryEr->first()->id; 
+        
+        return redirect()->action(
+            'ProductController@index', ['category' => $category]
+        );
+    }  
 }
