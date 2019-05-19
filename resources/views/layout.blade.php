@@ -6,18 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Webshop</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url('products') }}">Webshop</a>
+    <span class="ml-auto">
+        <a href="{{ url('cart') }}"><i style="color: white; margin-right: 5px" class="fas fa-shopping-cart"></i></a>
+    </span>
 </nav>
     
 <div class="wrapper" style="margin: 25px;">
     <div class="side" style="float: left; width: 22%;">
         <div class="card" style="width: 15rem; margin-bottom: 10px; border-radius: 20px;">
-            <div class="card-body">
-                <h5 class="card-title">Everything</h5>
+            <div class="card-body" style="border: 1px solid black; border-radius: 20px;">
+                @yield('current')
             </div>
         </div>
         @foreach($categories as $category)

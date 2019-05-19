@@ -11,7 +11,7 @@
             <img class="card-img-top" src="{{asset('images/noImg.jpg')}}" alt="Card image cap">
             <div class="card-body">
                 <a href="{{ url('details?product=' . $product->id) }}" class="btn btn-dark">Details</a>
-                <a href="{{ url('card?product=' . $product->id) }}" class="btn btn-success">Add</a>
+                <a href="{{ url('addCart?product=' . $product->id) }}" class="btn btn-success">Add</a>
             </div>
         </div>
     </div>
