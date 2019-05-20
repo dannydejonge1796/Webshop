@@ -13,16 +13,19 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url('products') }}">Webshop</a>
     <span class="ml-auto">
-        <a href="{{ url('cart') }}"><i style="color: white; margin-right: 5px" class="fas fa-shopping-cart"></i></a>
+        <a href="{{ url('cart') }}"><i style="color: white; margin-right: 5px" class="fas fa-shopping-cart"></i>
+        <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+
+        </a>
     </span>
 </nav>
     
 <div class="wrapper" style="margin: 25px;">
     <div class="side" style="float: left; width: 22%;">
-        <div class="card" style="width: 15rem; margin-bottom: 10px; border-radius: 20px;">
-            <div class="card-body" style="border: 1px solid black; border-radius: 20px;">
-                @yield('current')
-            </div>
+        <div style="border: 1px solid lightgray; width: 15rem; height: 50px; margin-bottom: 10px; border-radius: 20px;">
+          
+            @yield('current')
+
         </div>
         @foreach($categories as $category)
             <div class="card" style="width: 15rem; margin-bottom: 10px; border-radius: 20px;">

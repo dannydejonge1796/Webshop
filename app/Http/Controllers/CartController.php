@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
+use Session;
 
 class CartController extends Controller
 {
@@ -12,10 +14,14 @@ class CartController extends Controller
     {
     	$categories = Category::all();
 
-    	$data = $request->session()->all();
-    	var_dump($data);
+    	if (!Session::has('cart')) {
+            return view('cart.index', ['categories' => $categories, 'products' => null]);
+        }
 
-    	return view('cart.index', ['categories' => $categories]);
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        return view('cart.index', ['categories' => $categories, 'products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
     
@@ -26,18 +32,21 @@ class CartController extends Controller
      */
     public function addCartAction(Request $request)
     {
-        // $id = $request->get('product');
-        // $product = DB::table('products')->where('id', $id)->get();
-        // $category_id = $product->first()->category_id;
-        // $categoryEr = DB::table('categories')->where('id', $category_id)->get();
-        // $category = $categoryEr->first()->id; 
-        
-        $product = $request->get('product');
 
-        $request->session()->put('products', []);
+        $productId = $request->get('product');
+        $product = Product::find($productId);
 
-        $cart = new Cart();
-        $cart->add($product, 1);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+
+        // $request->session()->put('products', []);
+
+        // $cart = new Cart();
+        // $cart->add($product, 1);
 
         // $viewCart = $cart->view();
 
@@ -49,4 +58,22 @@ class CartController extends Controller
             'ProductController@index'
         );
     } 
+
+    /**
+     * Delete complete cart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCartAction(){
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
+        $cart = new Cart($oldCart);
+        $cart->deleteAll();
+
+        return redirect()->action(
+            'ProductController@index'
+        );
+
+    }
 }
