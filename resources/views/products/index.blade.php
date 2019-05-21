@@ -1,7 +1,15 @@
 @extends('layout')
 
 @section('current')
-      <h5 style="text-align: center; line-height: 50px;">Everything</h5>
+
+@if($category == null)
+    <h5 style="text-align: center; line-height: 50px;">Everything</h5>
+@else
+    @foreach($category as $cat)
+        <h5 style="text-align: center; line-height: 50px;">{{ $cat->name }}</h5>
+    @endforeach
+@endif
+
 @endsection
 
 

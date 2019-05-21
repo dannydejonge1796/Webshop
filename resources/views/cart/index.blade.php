@@ -25,14 +25,14 @@
 			@foreach($products as $product)
 
 			    <tr>
-				    <td class="col-sm-6">{{ $product['item']['name'] }}</td>
-				    <td class="col-sm-2">{{ $product['qty'] }} <i style="color: gray" class="fas fa-arrow-up"></i> <i style="color: gray;" class="fas fa-arrow-down"></i></td>
+				    <td class="col-sm-6">{{ $product['name'] }}</td>
+				    <td class="col-sm-2">{{ $product['quantity'] }} <i style="color: gray" class="fas fa-arrow-up"></i> <i style="color: gray;" class="fas fa-arrow-down"></i></td>
 				    <td class="col-sm-2">    
 				    	<div class="btn-group">
 							<a href="#"><i  style="color: darkred" class="far fa-trash-alt"></i></a>
 						</div>
 					</td>
-				    <td class="col-sm-2">€ {{ $product['price'] }}</td>
+				    <td class="col-sm-2">€ {{ $product['subtotal'] }}</td>
 			    </tr>
 		
 			@endforeach
@@ -42,7 +42,7 @@
 					<td><strong>{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</strong></td>
 					<td>
 						<div class="btn-group">
-							<a href="{{ url('deleteCart') }}"><i  style="color: darkred" class="far fa-trash-alt"></i></a>
+							<a href="{{ url('kill') }}"><i  style="color: darkred" class="far fa-trash-alt"></i></a>
 						</div>
 					</td>
 					<td><strong>€ {{$totalPrice}} </strong></td>		

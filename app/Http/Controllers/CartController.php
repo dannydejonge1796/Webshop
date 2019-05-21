@@ -10,6 +10,13 @@ use Session;
 
 class CartController extends Controller
 {
+
+    private $cart;
+
+    public function __construct() {
+        $this->cart = new Cart();
+    }
+
 	function cartAction(Request $request)
     {
     	$categories = Category::all();
@@ -18,10 +25,22 @@ class CartController extends Controller
             return view('cart.index', ['categories' => $categories, 'products' => null]);
         }
 
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
+        return view('cart.index', [
+            'categories' => $categories, 
+            'products' => $this->cart->getItems(), 
+            'totalQty' => $this->cart->GetTotalItemCount(),
+            'totalPrice' => $this->cart->GetTotalPrice()]);
+    }
 
-        return view('cart.index', ['categories' => $categories, 'products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+
+    /**
+     * Empties the cart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function kill() {
+        session()->put('cart', null);
+        return redirect()->back();
     }
 
     
@@ -32,31 +51,14 @@ class CartController extends Controller
      */
     public function addCartAction(Request $request)
     {
+        $category = $request->get('category');
 
         $productId = $request->get('product');
         $product = Product::find($productId);
 
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $this->cart->add($product, $product->id);
 
-        $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
-
-        $request->session()->put('cart', $cart);
-
-        // $request->session()->put('products', []);
-
-        // $cart = new Cart();
-        // $cart->add($product, 1);
-
-        // $viewCart = $cart->view();
-
-        // var_dump($viewCart);
-
-        // exit();
-
-        return redirect()->action(
-            'ProductController@index'
-        );
+        return redirect()->back();
     } 
 
     /**
@@ -66,13 +68,10 @@ class CartController extends Controller
      */
     public function deleteCartAction(){
 
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-
-        $cart = new Cart($oldCart);
-        $cart->deleteAll();
+        $this->cart->deleteAll();
 
         return redirect()->action(
-            'ProductController@index'
+            'CartController@cartAction'
         );
 
     }

@@ -24,5 +24,6 @@ Route::get('/cart', 'CartController@cartAction')->name('cart');
 Route::get('/addCart', 'CartController@addCartAction')->name('addCart');
 Route::get('/deleteCart', 'CartController@deleteCartAction')->name('deleteCart');
 
+Route::get('/kill', 'CartController@kill');
 
 

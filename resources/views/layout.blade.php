@@ -19,7 +19,7 @@
         </a>
     </span>
 </nav>
-    
+
 <div class="wrapper" style="margin: 25px;">
     <div class="side" style="float: left; width: 22%;">
         <div style="border: 1px solid lightgray; width: 15rem; height: 50px; margin-bottom: 10px; border-radius: 20px;">
