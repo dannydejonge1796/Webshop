@@ -38,7 +38,7 @@ class Cart
             $this->items[$id] = $existingItem;
         } else {
             // nieuw toevoegen met aantal 1
-            $newitem = ['name' => $item->name, 'price'=>$item->price];
+            $newitem = ['name' => $item->name, 'price'=>$item->price, 'id'=>$item->id];
             $newitem['quantity'] = 1;
             $newitem['subtotal'] = $newitem['price'] * $newitem['quantity'];
             $this->items[$id] = $newitem;
@@ -65,4 +65,5 @@ class Cart
     public function getItems() {
         return $this->items;
     }
+
 }

@@ -17,7 +17,6 @@ class ProductController extends Controller
         $this->cart = new Cart();
     }
 
-
     /**
      * Display a listing of the resource.
      *

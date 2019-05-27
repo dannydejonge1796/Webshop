@@ -29,7 +29,7 @@
 				    <td class="col-sm-2">{{ $product['quantity'] }} <i style="color: gray" class="fas fa-arrow-up"></i> <i style="color: gray;" class="fas fa-arrow-down"></i></td>
 				    <td class="col-sm-2">    
 				    	<div class="btn-group">
-							<a href="#"><i  style="color: darkred" class="far fa-trash-alt"></i></a>
+							<a href="{{ url('killOne?product=' . $product['id']) }}"><i  style="color: darkred" class="far fa-trash-alt"></i></a>
 						</div>
 					</td>
 				    <td class="col-sm-2">€ {{ $product['subtotal'] }}</td>

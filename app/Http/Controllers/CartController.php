@@ -43,6 +43,25 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Deletes one out of the cart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function killOne(Request $request) {
+        
+        $product = $request->get('product');
+
+        $newQuantity = $this->cart->items[$product]['quantity'];
+        $this->cart->totalQty = $this->cart->totalQty - $newQuantity;
+
+        unset($this->cart->items[$product]);  
+        session()->put('cart', $this->cart);
+
+        return redirect()->back();
+    }
+
+
     
     /**
      * Add products to shoppingcard.
@@ -60,19 +79,4 @@ class CartController extends Controller
 
         return redirect()->back();
     } 
-
-    /**
-     * Delete complete cart.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteCartAction(){
-
-        $this->cart->deleteAll();
-
-        return redirect()->action(
-            'CartController@cartAction'
-        );
-
-    }
 }

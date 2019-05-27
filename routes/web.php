@@ -25,5 +25,10 @@ Route::get('/addCart', 'CartController@addCartAction')->name('addCart');
 Route::get('/deleteCart', 'CartController@deleteCartAction')->name('deleteCart');
 
 Route::get('/kill', 'CartController@kill');
+Route::get('/killOne', 'CartController@killOne');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
