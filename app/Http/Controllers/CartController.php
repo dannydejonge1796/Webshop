@@ -21,6 +21,23 @@ class CartController extends Controller
     {
     	$categories = Category::all();
 
+        $hiddenId = $request->input('hiddenId');
+
+        if ($hiddenId !== null) {
+
+            $this->cart->totalQty = $this->cart->totalQty - $this->cart->items[$hiddenId]['quantity']; 
+   
+            $quantity = $request->input('qtyField' . $hiddenId);
+            $this->cart->items[$hiddenId]['quantity'] = $quantity;   
+            $this->cart->items[$hiddenId]['subtotal'] = $this->cart->items[$hiddenId]['price'] * $quantity;
+
+            session()->put('cart', $this->cart);
+
+            $this->cart->totalQty = $this->cart->totalQty + $this->cart->items[$hiddenId]['quantity']; 
+
+            return redirect()->route('cart');
+        }
+
     	if (!Session::has('cart')) {
             return view('cart.index', ['categories' => $categories, 'products' => null]);
         }
@@ -40,7 +57,7 @@ class CartController extends Controller
      */
     public function kill() {
         session()->put('cart', null);
-        return redirect()->back();
+        return redirect()->route('cart');
     }
 
     /**
@@ -58,7 +75,7 @@ class CartController extends Controller
         unset($this->cart->items[$product]);  
         session()->put('cart', $this->cart);
 
-        return redirect()->back();
+        return redirect()->route('cart');
     }
 
 
@@ -70,6 +87,7 @@ class CartController extends Controller
      */
     public function addCartAction(Request $request)
     {
+
         $category = $request->get('category');
 
         $productId = $request->get('product');

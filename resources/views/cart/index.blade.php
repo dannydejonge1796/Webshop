@@ -23,10 +23,16 @@
 			<tbody>
 		
 			@foreach($products as $product)
-
+			
 			    <tr>
 				    <td class="col-sm-6">{{ $product['name'] }}</td>
-				    <td class="col-sm-2">{{ $product['quantity'] }} <i style="color: gray" class="fas fa-arrow-up"></i> <i style="color: gray;" class="fas fa-arrow-down"></i></td>
+				    <td class="col-sm-2">
+				    	<form>
+					    	<input style="width: 50px;" type="number" name="qtyField{{ $product['id'] }}" value="{{ $product['quantity'] }}">
+					    	<input type="hidden" name="hiddenId" value="{{ $product['id'] }}">
+					    	<button style="margin-left: 10px; border-radius: 50%; background-color: white; border: 1px solid white" class="btn btn-dark" type="submit"><i style="color: black;" class="far fa-check-circle"></i></button>
+				    	</form>
+				    </td>
 				    <td class="col-sm-2">    
 				    	<div class="btn-group">
 							<a href="{{ url('killOne?product=' . $product['id']) }}"><i  style="color: darkred" class="far fa-trash-alt"></i></a>
