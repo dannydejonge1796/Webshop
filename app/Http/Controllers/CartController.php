@@ -19,6 +19,10 @@ class CartController extends Controller
 
 	function cartAction(Request $request)
     {
+        if (!$request->user()) {
+            return redirect()->route('login');
+        }
+
     	$categories = Category::all();
 
         $hiddenId = $request->input('hiddenId');
@@ -56,6 +60,11 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function kill() {
+
+        if (!$request->user()) {
+            return redirect()->route('login');
+        }
+
         session()->put('cart', null);
         return redirect()->route('cart');
     }
@@ -66,6 +75,10 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function killOne(Request $request) {
+
+        if (!$request->user()) {
+            return redirect()->route('login');
+        }
         
         $product = $request->get('product');
 
@@ -87,6 +100,10 @@ class CartController extends Controller
      */
     public function addCartAction(Request $request)
     {
+
+        if (!$request->user()) {
+            return redirect()->route('login');
+        }
 
         $category = $request->get('category');
 

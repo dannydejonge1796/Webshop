@@ -30,3 +30,5 @@ Route::get('/killOne', 'CartController@killOne');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
