@@ -22,6 +22,7 @@ Route::get('/details', 'ProductController@detailsAction')->name('details');
 
 Route::get('/cart', 'CartController@cartAction')->name('cart');
 Route::get('/addCart', 'CartController@addCartAction')->name('addCart');
+
 Route::get('/deleteCart', 'CartController@deleteCartAction')->name('deleteCart');
 
 Route::get('/kill', 'CartController@kill');
@@ -32,3 +33,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/addorder', 'OrderController@addOrder');
+Route::get('/orders', 'OrderController@index')->name('orders');

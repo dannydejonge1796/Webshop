@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Category;
+use App\Cart;
 use Illuminate\Http\Request;
+use Session;
 
 class OrderController extends Controller
 {
@@ -12,74 +15,40 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $categories = Category::all();
+
+        $orders = json_decode(Order::all('product_id')[0]);
+
+      
+
+        var_dump($orders);
+
+        exit();
+
+        return view('order.index', ['categories' => $categories, 'orders' => $orders]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function addOrder(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if (empty(Session::get('cart')->items)) {
+            return redirect()->back();
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
-    {
-        //
-    }
+        $user = auth()->user();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
+        $order = new Order([
+            'number' => 1,
+            'user_id'=> $user->id,
+            'product_id'=> json_encode(Session::get('cart'))
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
+        $order->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
+        session()->put('cart', null);
+
+        return redirect()->route('orders');
     }
 }

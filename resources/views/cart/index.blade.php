@@ -58,7 +58,7 @@
 
 		</table>
 
-		<button type="button" class="btn btn-success">Checkout</button>
+		<a href="{{ url('addorder') }}" class="btn btn-success">Checkout</a>
 	</div>
 </div>
 

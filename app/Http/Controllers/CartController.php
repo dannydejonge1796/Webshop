@@ -59,7 +59,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function kill() {
+    public function kill(Request $request) {
 
         if (!$request->user()) {
             return redirect()->route('login');

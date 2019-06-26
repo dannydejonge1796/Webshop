@@ -13,14 +13,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url('products') }}">Webshop</a>
 
-    <span class="mr-auto"><p>ih</p></span>
     <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item active">
+            <a style="outline: none;" href="{{ url('orders') }}">
+                 <i style="color: white; margin-left: 20px;;" class="fas fa-clipboard-list"></i>
+            </a>
+        </li>
+
         <li class="nav-item active">
             <a style="outline: none;" href="{{ url('cart') }}">
-                <i style="color: white;" class="fas fa-shopping-cart"></i>
+                <i style="color: white; margin-left: 20px;;" class="fas fa-shopping-cart"></i>
                 <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
             </a>
         </li>
+        
         <li class="nav-item active">
             <a style="outline: none;" href="{{ url('login') }}">
                 <i style="color: white; margin-left: 20px;" class="far fa-user-circle"></i>
