@@ -14,7 +14,7 @@ class AddAllDetailsToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('allDetails');
+            $table->text('allDetails');
         });
     }
 
