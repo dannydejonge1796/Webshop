@@ -29,7 +29,7 @@
         </li>
         
         <li class="nav-item active">
-            <a style="outline: none;" href="{{ url('login') }}">
+            <a style="outline: none;" href="{{ url('home') }}">
                 <i style="color: white; margin-left: 20px;" class="far fa-user-circle"></i>
             </a>
         </li>

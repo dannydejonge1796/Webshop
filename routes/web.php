@@ -36,3 +36,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/addorder', 'OrderController@addOrder');
 Route::get('/orders', 'OrderController@index')->name('orders');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

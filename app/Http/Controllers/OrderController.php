@@ -18,14 +18,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-
-        $orders = json_decode(Order::all('product_id')[0]);
-
-      
-
-        var_dump($orders);
-
-        exit();
+        $orders = Order::all();
 
         return view('order.index', ['categories' => $categories, 'orders' => $orders]);
     }
@@ -40,9 +33,9 @@ class OrderController extends Controller
         $user = auth()->user();
 
         $order = new Order([
-            'number' => 1,
+            'number' => md5(uniqid(rand(), true)),
             'user_id'=> $user->id,
-            'product_id'=> json_encode(Session::get('cart'))
+            'product_id'=> 1,
         ]);
 
         $order->save();
